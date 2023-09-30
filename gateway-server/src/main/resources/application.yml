@@ -1,0 +1,48 @@
+server:
+  port: 8500
+
+#曾经失败的Eureka使用尝试，不要在意这些细节。池沼博主的杰作。
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8801/eureka, http://localhost:8802/eureka
+
+spring:
+  application:
+    name: grategateway
+  cloud:
+#    这里使用了yml文件的方式来配置了部分路由，在全局过滤器面前，这些局部过滤器是那么的眉清目秀！
+    gateway:
+      routes:
+        - id : borrow-service
+          uri: lb://borrowservice
+#          这里设置期望的URL，如果没有期望的URL的话，那么也是无法访问的！
+          predicates:
+            - Path=/borrow/**
+          filters:
+            - name: CircuitBreaker
+              args:
+#                这里设置一下如果失败了该怎么办，该路由到哪里去
+                name: NoBook
+                fallbackuri: forward:/WhenTailToUseBorrowService
+
+        - id: book-service
+          uri: lb://bookservice
+          predicates:
+            - Path=/book/**
+          filters:
+#            - AddRequestParameter=Test, HelloWorld!
+            - name: CircuitBreaker
+              args:
+                name: NoBook
+                fallbackuri: forward:/WhenTailToUseUserService
+
+        - id: user-service
+          uri: lb://userservice
+          predicates:
+            - Path=/user/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: NoBook
+                fallbackuri: forward:/WhenTailToUseBookService

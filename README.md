@@ -18,6 +18,7 @@ localhost:8500/borrow/{这里写任意数字}
 ![image](https://github.com/Met-String/Gateway-Redis-Example/assets/111751431/a4c14127-1513-4502-a110-a3ad4baec4df)
 
 密钥在哪里发放？这个项目运行的时候会在根目录里面创建一个MyKey.txt，并且把随机生成的密钥放进去。
+什么？你问我为什么不用验证码？为什么不直接把验证码发手机上？当然是我不会啊！
 ![image](https://github.com/Met-String/Gateway-Redis-Example/assets/111751431/0a90c979-c2b3-4483-9abc-f355235579c8)
 
 
@@ -25,6 +26,7 @@ localhost:8500/borrow/{这里写任意数字}
 localhost:8500/user/2?key=486778
 
 接着恭喜您！您成功访问了（断路器）页面！
+
 ![image](https://github.com/Met-String/Gateway-Redis-Example/assets/111751431/c805d653-9b0e-44b4-95d7-86cada1ab335)
 
 

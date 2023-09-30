@@ -35,7 +35,7 @@ spring:
             - name: CircuitBreaker
               args:
                 name: NoBook
-                fallbackuri: forward:/WhenTailToUseUserService
+                fallbackuri: forward:/WhenTailToUseBookService
 
         - id: user-service
           uri: lb://userservice
@@ -45,4 +45,4 @@ spring:
             - name: CircuitBreaker
               args:
                 name: NoBook
-                fallbackuri: forward:/WhenTailToUseBookService
+                fallbackuri: forward:/WhenTailToUseUserService
